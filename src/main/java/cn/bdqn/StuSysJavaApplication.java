@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class StuSysJavaApplication {
     //这个注释别动
+    //这个是老吴加的注释
     public static void main(String[] args) {
         SpringApplication.run(StuSysJavaApplication.class, args);
     }
