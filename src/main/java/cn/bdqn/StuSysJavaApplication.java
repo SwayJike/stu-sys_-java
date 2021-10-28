@@ -7,9 +7,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class StuSysJavaApplication {
-//这是我的注释
+//这是老吴的注释
     public static void main(String[] args) {
         SpringApplication.run(StuSysJavaApplication.class, args);
     }
+//这是我的注释
+
 
 }
