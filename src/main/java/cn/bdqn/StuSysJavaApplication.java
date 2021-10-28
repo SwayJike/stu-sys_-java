@@ -7,13 +7,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class StuSysJavaApplication {
-//这是老吴的注释
-//这是我的注释
-    //我是我的一个新注释
+    //这个注释别动
     public static void main(String[] args) {
         SpringApplication.run(StuSysJavaApplication.class, args);
     }
-//这是我的注释
 
 
 }
