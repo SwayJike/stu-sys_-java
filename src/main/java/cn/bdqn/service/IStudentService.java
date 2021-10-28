@@ -1,0 +1,21 @@
+package cn.bdqn.service;
+
+import cn.bdqn.entity.Student;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author SwayJike
+ * @since 2021-09-19
+ */
+public interface IStudentService extends IService<Student> {
+
+    List<String> getCodeBuSno(String sno);
+    List<Integer> getCodeIdBuSno(String sno);
+    List<String> getAllSno();
+}

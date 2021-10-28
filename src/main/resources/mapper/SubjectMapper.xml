@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bdqn.mapper.SubjectMapper">
+
+    <select id="getAll" resultType="subject" resultMap="subList">
+        select SubjectId, SubjectName, ClassHour, GradeId
+        from stusys.subject;
+    </select>
+    
+    <resultMap id="subList" type="subject">
+        <id property="subjectid" column="SubjectId"/>
+        <association property="grade" column="gradeid" select="getGradeById"/>
+    </resultMap>
+
+    <select id="getGradeById" resultType="grade" parameterType="int">
+        select *
+        from stusys.grade where GradeId=#{id};
+    </select>
+</mapper>
