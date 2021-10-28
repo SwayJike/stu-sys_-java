@@ -1,8 +1,8 @@
 INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (1, '/', '/home', 'Home', '首页', null, 0);
-INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (2, '/', '/inf', null, '个人信息', 'el-icon-user-solid', 1);
-INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (3, '/', '/sub', null, '课程信息', 'el-icon-s-order', 1);
-INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (4, '/', '/res', null, '成绩管理', 'el-icon-s-tools', 1);
-INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (5, '/', '/stu', null, '学生管理', 'el-icon-s-platform', 1);
+INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (2, '/', '/home', 'Home', '个人信息', 'el-icon-user-solid', 1);
+INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (3, '/', '/home', 'Home', '课程信息', 'el-icon-s-order', 1);
+INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (4, '/', '/home', 'Home', '成绩管理', 'el-icon-s-tools', 1);
+INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (5, '/', '/home', 'Home', '学生管理', 'el-icon-s-platform', 1);
 INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (6, '/inf/', '/inf/authInfo', 'AuthInfo', '查询个人信息', 'el-icon-search', 2);
 INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (7, '/inf/', '/inf/modifyAuthInfo', 'ModifyAuthInfo', '修改个人信息', 'el-icon-monitor', 2);
 INSERT INTO stusys.menu (id, url, path, component, name, icon, parentId) VALUES (8, '/res/', '/res/addStuResult', 'AddStuResult', '添加学生成绩', 'el-icon-edit-outline', 4);
