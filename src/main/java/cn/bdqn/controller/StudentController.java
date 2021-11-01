@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -94,30 +96,34 @@ public class StudentController {
     }
 
     @GetMapping(value = "/toExcel",produces = "application/octet-stream")
-    public void toExcel(HttpServletResponse response) throws IOException, InterruptedException {
+    public void toExcel(HttpServletResponse response) throws IOException{
         List<Student> list = studentService.list();
         ExportParams params = new ExportParams("学生列表","学生列表", ExcelType.HSSF);
         Workbook workbook = ExcelExportUtil.exportExcel(params,Student.class,list);
         ServletOutputStream out = null;
         try {
-            long s = System.currentTimeMillis();
-            //response.reset();
-            response.setHeader("Content-Type","application/octet-stream");
-            response.setContentType("application/octet-stream;charset=utf-8");
-            response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
-            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("学生列表"+s+".xls","utf-8"));
+            setResponse(response);
             out = response.getOutputStream();
             workbook.write(out);
-            workbook.write(new FileOutputStream("C:\\Users\\SwayJike\\Desktop\\学生列表\\学生列表"+s+".xls"));
-            workbook.close();
-            Runtime.getRuntime().exec("cmd /c start C:\\Users\\SwayJike\\Desktop\\学生列表");
         }catch (IOException e){
             e.printStackTrace();
         }finally {
+            if (workbook != null) {
+                workbook.close();
+            }
             if (out != null) {
                 out.close();
             }
         }
     }
+
+    public void setResponse(HttpServletResponse response) throws UnsupportedEncodingException {
+        response.setHeader("Content-Type","application/octet-stream");
+        response.setContentType("application/octet-stream;charset=utf-8");
+        response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("学生列表"+System.currentTimeMillis()+".xls","utf-8"));
+    }
+
+
 
 }
