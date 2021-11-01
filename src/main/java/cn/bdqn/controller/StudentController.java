@@ -107,17 +107,18 @@ public class StudentController {
             response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
             response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("学生列表"+s+".xls","utf-8"));
             out = response.getOutputStream();
-            workbook.write(out);
-            workbook.write(new FileOutputStream("C:\\Users\\SwayJike\\Desktop\\学生列表\\学生列表"+s+".xls"));
             workbook.close();
-            Runtime.getRuntime().exec("cmd /c start C:\\Users\\SwayJike\\Desktop\\学生列表");
         }catch (IOException e){
             e.printStackTrace();
         }finally {
+            if (workbook != null) {
+                workbook.write(out);
+            }
             if (out != null) {
                 out.close();
             }
         }
     }
+
 
 }
