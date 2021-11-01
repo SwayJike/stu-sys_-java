@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.deploy.nativesandbox.comm.Response;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -93,7 +94,7 @@ public class StudentController {
         return Result.succ(null,count);
     }
 
-    @GetMapping(value = "/toExcel",produces = "application/octet-stream")
+    @GetMapping(value = "/toExcel"/*,produces = "application/octet-stream"*/)
     public void toExcel(HttpServletResponse response) throws IOException, InterruptedException {
         List<Student> list = studentService.list();
         ExportParams params = new ExportParams("学生列表","学生列表", ExcelType.HSSF);
@@ -101,7 +102,6 @@ public class StudentController {
         ServletOutputStream out = null;
         try {
             long s = System.currentTimeMillis();
-            //response.reset();
             response.setHeader("Content-Type","application/octet-stream");
             response.setContentType("application/octet-stream;charset=utf-8");
             response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");

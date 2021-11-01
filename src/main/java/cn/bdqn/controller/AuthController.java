@@ -17,13 +17,11 @@ import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.google.code.kaptcha.Producer;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -71,7 +69,7 @@ public class AuthController {
         ImageIO.write(image,"png",outputStream);
 
         //将图片转成base64格式
-        BASE64Encoder encoder = new BASE64Encoder();
+        Base64Encoder encoder = new Base64Encoder();
         String str = "data:image/png;base64,";
         String base64Img = str + encoder.encode(outputStream.toByteArray());
 
