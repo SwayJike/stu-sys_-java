@@ -1,5 +1,8 @@
 package cn.bdqn;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.bdqn.entity.*;
 import cn.bdqn.mapper.*;
 import cn.bdqn.random.*;
@@ -10,6 +13,7 @@ import cn.bdqn.util.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +21,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
+import javax.servlet.ServletOutputStream;
 import javax.sql.DataSource;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -144,6 +146,32 @@ class StuSysJavaApplicationTests {
     @Test
     void test10(){
         System.out.println(resultMapper.getAll(1));
+    }
+
+    @Test
+    void test11() throws Exception {
+        List<Student> list = new ArrayList<>();
+        for (int i = 1; i <= 50; i++) {
+            Student student = new Student("e"+(10000+i),null, RandomChinese.nextRandomLength(2,3), RandomSex.next(),RandomNum.next(1, 3), RandomPhoneNum.nextPhoneNum(), RandomAddress.nextAddress(),RandomDateTime.nextDate("2000-01-01","2005-01-01"),RandomEmail.nextEmail());
+            //studentMapper.insert(student);
+            list.add(student);
+        }
+        ExportParams params = new ExportParams("学生列表","学生列表", ExcelType.HSSF);
+        Workbook workbook = ExcelExportUtil.exportExcel(params,Student.class,list);
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream("E:\\上传测试数据\\学生列表"+System.currentTimeMillis()+".xls");
+            workbook.write(out);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (workbook != null) {
+                workbook.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+        }
     }
 
 }

@@ -2,7 +2,9 @@ package cn.bdqn.controller;
 
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.bdqn.common.lang.Result;
 import cn.bdqn.entity.Student;
@@ -17,6 +19,7 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +28,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -122,6 +126,15 @@ public class StudentController {
         response.setContentType("application/octet-stream;charset=utf-8");
         response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
         response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("学生列表"+System.currentTimeMillis()+".xls","utf-8"));
+    }
+
+    @PostMapping("/import")
+    public Result importStu(MultipartFile file) throws Exception {
+        ImportParams params = new ImportParams();
+        params.setTitleRows(1);
+        List<Student> list = ExcelImportUtil.importExcel(file.getInputStream(), Student.class, params);
+        studentService.saveBatch(list);
+        return Result.succ(null);
     }
 
 
