@@ -1,5 +1,4 @@
-create database stusys;
-use stusys;
+
 
 create table if not exists grade
 (

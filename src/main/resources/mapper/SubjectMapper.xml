@@ -4,7 +4,7 @@
 
     <select id="getAll" resultType="subject" resultMap="subList">
         select SubjectId, SubjectName, ClassHour, GradeId
-        from stusys.subject;
+        from subject;
     </select>
     
     <resultMap id="subList" type="subject">
@@ -14,6 +14,6 @@
 
     <select id="getGradeById" resultType="grade" parameterType="int">
         select *
-        from stusys.grade where GradeId=#{id};
+        from grade where GradeId=#{id};
     </select>
 </mapper>

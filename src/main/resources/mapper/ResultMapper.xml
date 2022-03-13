@@ -4,7 +4,7 @@
 
     <select id="getAll" resultMap="resList" parameterType="int">
         select Id, StudentNo, SubjectId, StudentResult, ExamDate
-        from stusys.result where SubjectId=#{id} order by StudentResult desc;
+        from `result` where SubjectId=#{id} order by StudentResult desc;
     </select>
 
     <resultMap id="resList" type="result">
@@ -15,7 +15,7 @@
 
     <select id="getSubjectById" resultType="subject">
         select SubjectId, SubjectName, ClassHour, GradeId
-        from stusys.subject where SubjectId=#{id};
+        from subject where SubjectId=#{id};
     </select>
 
     <select id="getStudentByNo" resultType="student">
@@ -28,7 +28,7 @@
                Address,
                BornDate,
                Email
-        from stusys.student
+        from student
         where StudentNo = #{no};
     </select>
 </mapper>

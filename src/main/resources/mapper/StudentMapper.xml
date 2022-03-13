@@ -3,21 +3,21 @@
 <mapper namespace="cn.bdqn.mapper.StudentMapper">
 
     <select id="getCodeIdBySno" resultType="int">
-        select r.id from stusys.student s
-            join stusys.student_role sr on s.StudentNo=sr.sno
-            join stusys.role r on sr.roleid=r.id
+        select r.id from student s
+            join student_role sr on s.StudentNo=sr.sno
+            join `role` r on sr.roleid=r.id
             where s.StudentNo=#{sno}
     </select>
 
     <select id="getCodeBySno" resultType="string">
-        select r.id from stusys.student s
-                             join stusys.student_role sr on s.StudentNo=sr.sno
-                             join stusys.role r on sr.roleid=r.id
+        select r.id from student s
+                             join student_role sr on s.StudentNo=sr.sno
+                             join `role` r on sr.roleid=r.id
         where s.StudentNo=#{sno}
     </select>
     
     <select id="getAllSno" resultType="string">
-        select StudentNo from stusys.student order by StudentNo asc
+        select StudentNo from student order by StudentNo asc
     </select>
 
 </mapper>

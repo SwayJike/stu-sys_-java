@@ -5,9 +5,6 @@ import cn.bdqn.mapper.StudentMapper;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -32,6 +29,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private StudentMapper studentMapper;
 
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -41,11 +39,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if(StrUtil.isEmpty(s)){
             throw new RuntimeException("学号不能为空....");
         }
-        Student student = studentMapper.selectOne(new QueryWrapper<Student>().eq("StudentNo", s));
+        Student student;
+        student = studentMapper.selectOne(new QueryWrapper<Student>().eq("StudentNo", s));
         if (student == null) {
-            throw new UsernameNotFoundException(String.format("%s这个学生不存在",s));
+            throw new UsernameNotFoundException(String.format("%s这个学号不存在",s));
         }
-
         return new User(s,passwordEncoder.encode(student.getLoginpwd()),getGrantedAuthoritiesBySno(s));
     }
 

@@ -30,7 +30,7 @@ public class CodeGenerator {
     private static String author="SwayJike";//作者名
     private static String moduleName="";//模块名 可以不填，填了后格式为 包名+模块名
     private static String packageName="cn.bdqn";//包名
-    private static String tablesName="menu";//表名，多个英文逗号分割
+    private static String tablesName="administrator";//表名，多个英文逗号分割
     private static String mapperLocation="resource"; //Mybatis映射文件路径 填JAVA生成在mapper层，填resource生成在resource下
 
     /**

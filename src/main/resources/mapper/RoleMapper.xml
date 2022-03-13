@@ -4,7 +4,7 @@
 
     <select id="getMenuIdByCodeId" parameterType="list" resultType="int">
         select  distinct (menuid)
-        from stusys.role_menu where roleid in
+        from role_menu where roleid in
         <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
     </select>
 

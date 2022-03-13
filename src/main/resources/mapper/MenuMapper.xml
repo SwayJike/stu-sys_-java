@@ -3,7 +3,7 @@
 <mapper namespace="cn.bdqn.mapper.MenuMapper">
 
     <select id="getMenuList" resultMap="menuList" parameterType="list">
-        select * from stusys.menu where id!=1 and id in <foreach collection="list" open="(" close=")" separator="," item="id">#{id}</foreach>
+        select * from menu where id!=1 and id in <foreach collection="list" open="(" close=")" separator="," item="id">#{id}</foreach>
     </select>
 
     <resultMap id="menuList" type="menu">
@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="getChildrenList" resultType="menu">
-        select * from stusys.menu where parentId=#{id}
+        select * from menu where parentId=#{id}
     </select>
 
 </mapper>
