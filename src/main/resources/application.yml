@@ -1,3 +1,9 @@
+server:
+  port: 9999
+
+# 加载日志环境
+logging:
+  config: classpath:logback/logback-spring-prod.xml
 
 spring:
 #数据源配置
@@ -35,11 +41,12 @@ spring:
 #redis常用配置
   redis:
     #数据库索引(默认为0)
-    database: 0
+    database: 1
     #服务器连接地址
     host: 120.25.208.81
     #服务器连接端口
     port: 6379
+    password: jike1314
     #连接超时时间(毫秒)
     timeout: 1800000
     lettuce:
@@ -65,9 +72,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-server:
-  port: 9999
 
 jike:
   jwt:
